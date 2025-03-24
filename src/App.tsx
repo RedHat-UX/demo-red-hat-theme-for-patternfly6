@@ -7,6 +7,7 @@ import PfBreadcrumb from "./components/BreadCrumb/BreadCrumb";
 import PfForm from "./components/Form/Form";
 import PfAccordion from "./components/Accordion/Accordion";
 import PfCard from "./components/Card/Card";
+import PfTable from "./components/Table/Table";
 import 'redhat-brand-theme/dist/redhat-brand-theme.css';
 
 function App() {
@@ -46,6 +47,10 @@ const AppRoutes = createBrowserRouter([{
     {
       path: "/card",
       element: <PfCard/>
+    },
+    {
+      path: "/table",
+      element: <PfTable/>
     }
   ]
 }])
