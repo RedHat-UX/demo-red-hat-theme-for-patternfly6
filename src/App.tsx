@@ -8,8 +8,8 @@ import PfForm from "./components/Form/Form";
 import PfAccordion from "./components/Accordion/Accordion";
 import PfCard from "./components/Card/Card";
 //import 'redhat-brand-theme/dist/redhat-brand-theme.css';
-import './pf-workshop.css';
-
+import './pf-workshop.css'; // Will add the CSS here as part of the workshop
+ 
 function App() {
 
   return (
