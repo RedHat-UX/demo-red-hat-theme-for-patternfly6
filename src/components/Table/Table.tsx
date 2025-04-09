@@ -30,6 +30,7 @@ import { TableStriped } from "./variations/TableStriped";
 import { TableStripedExpandable } from "./variations/TableStripedExpandable";
 import { TableStripedMultipleTbody } from "./variations/TableStripedMultipleTbody";
 import { TableStripedTr } from "./variations/TableStripedTr";
+import { Title } from '@patternfly/react-core';
 
 
 
@@ -72,8 +73,8 @@ const PfTable = () => {
   return (
     <>
       {tableVariations.map(({ component: Component, name }, index) => (
-        <div key={index} style={{marginBottom: "30px"}}>
-          <p style={{marginBottom: 15, fontSize: 25}}>{name}</p>
+        <div key={index} style={{marginBottom: "4rem"}}>
+          <Title headingLevel="h2" style={{paddingBottom:"1.5rem"}}>{name}</Title>
           <Component />
         </div>
       ))}
