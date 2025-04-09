@@ -8,7 +8,8 @@ import PfForm from "./components/Form/Form";
 import PfAccordion from "./components/Accordion/Accordion";
 import PfCard from "./components/Card/Card";
 import PfTable from "./components/Table/Table";
-import 'redhat-brand-theme/dist/redhat-brand-theme.css';
+// import 'redhat-brand-theme/dist/redhat-brand-theme.css';
+import './rhds-theme.css';
 
 function App() {
 
