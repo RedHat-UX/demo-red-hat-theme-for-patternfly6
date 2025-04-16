@@ -1070,7 +1070,7 @@
 
 /* Nested selectors for table header that need specific overrides */
 .pf-v6-c-table thead:where(.pf-v6-c-table__thead) {
-  border-bottom: 1px solid #d2d2d2;
+  border-bottom: var(--pf-t--global--border--width--100, 1px) solid #d2d2d2;
 }
 .pf-v6-c-table thead:where(.pf-v6-c-table__thead) .pf-v6-c-table__favorite .pf-v6-c-button {
   --pf-v6-c-button--m-plain__icon--Color: #6a6e73;
@@ -1089,6 +1089,16 @@
 .pf-v6-c-table.pf-m-compact tr:where(.pf-v6-c-table__tr) > * {
   padding-inline-start: var(--rh-space-md, 8px);
   padding-inline-end: var(--rh-space-md, 8px);
+}
+
+/* Selectors for Editable rows table variant */
+.pf-v6-c-button.pf-m-plain {
+  color: #6a6e73;
+}
+
+/* Selectors for Expandable table variant */
+.pf-v6-c-table__expandable-row.pf-m-expanded {
+  border-bottom: 0;
 }
 
 /* Selectors for compound expandable table variants */
