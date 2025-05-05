@@ -1,5 +1,14 @@
 import React from 'react';
-import { Table, Thead, Tbody, Tr, Th, Td, TbodyProps, TrProps } from '@patternfly/react-table';
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TbodyProps,
+  TrProps
+} from '@patternfly/react-table';
 import styles from '@patternfly/react-styles/css/components/Table/table';
 
 export const TableDraggable: React.FunctionComponent = () => {
@@ -9,7 +18,7 @@ export const TableDraggable: React.FunctionComponent = () => {
   const [itemOrder, setItemOrder] = React.useState(['row1', 'row2', 'row3']);
   const [tempItemOrder, setTempItemOrder] = React.useState<string[]>([]);
 
-  const bodyRef = React.useRef<HTMLTableSectionElement>();
+  const bodyRef = React.useRef<HTMLTableSectionElement>(null);
 
   const onDragStart: TrProps['onDragStart'] = (evt) => {
     evt.dataTransfer.effectAllowed = 'move';
@@ -36,20 +45,26 @@ export const TableDraggable: React.FunctionComponent = () => {
 
   const move = (itemOrder: string[]) => {
     const ulNode = bodyRef.current;
+    if (!ulNode) return;
+
     const nodes = Array.from(ulNode.children);
     if (nodes.map((node) => node.id).every((id, i) => id === itemOrder[i])) {
       return;
     }
     while (ulNode.firstChild) {
-      ulNode.removeChild(ulNode.lastChild);
+      ulNode.removeChild(ulNode.lastChild!);
     }
 
     itemOrder.forEach((id) => {
-      ulNode.appendChild(nodes.find((n) => n.id === id));
+      const node = nodes.find((n) => n.id === id);
+      if (node) {
+        ulNode.appendChild(node);
+      }
     });
   };
 
   const onDragCancel = () => {
+    if (!bodyRef.current) return;
     Array.from(bodyRef.current.children).forEach((el) => {
       el.classList.remove(styles.modifiers.ghostRow);
       el.setAttribute('aria-pressed', 'false');
@@ -59,14 +74,10 @@ export const TableDraggable: React.FunctionComponent = () => {
     setIsDragging(false);
   };
 
-  const onDragLeave: TbodyProps['onDragLeave'] = (evt) => {
-    if (!isValidDrop(evt)) {
-      move(itemOrder);
-      setDraggingToItemIndex(null);
-    }
-  };
-
-  const isValidDrop = (evt: React.DragEvent<HTMLTableSectionElement | HTMLTableRowElement>) => {
+  const isValidDrop = (
+    evt: React.DragEvent<HTMLTableSectionElement | HTMLTableRowElement>
+  ) => {
+    if (!bodyRef.current) return false;
     const ulRect = bodyRef.current.getBoundingClientRect();
     return (
       evt.clientX > ulRect.x &&
@@ -84,17 +95,30 @@ export const TableDraggable: React.FunctionComponent = () => {
     }
   };
 
+  const onDragLeave: TbodyProps['onDragLeave'] = (evt) => {
+    if (!isValidDrop(evt)) {
+      move(itemOrder);
+      setDraggingToItemIndex(null);
+    }
+  };
+
   const onDragOver: TbodyProps['onDragOver'] = (evt) => {
     evt.preventDefault();
-
     const curListItem = (evt.target as HTMLTableSectionElement).closest('tr');
-    if (!curListItem || !bodyRef.current.contains(curListItem) || curListItem.id === draggedItemId) {
+
+    if (
+      !curListItem ||
+      !bodyRef.current?.contains(curListItem) ||
+      curListItem.id === draggedItemId
+    ) {
       return null;
     } else {
       const dragId = curListItem.id;
-      const newDraggingToItemIndex = Array.from(bodyRef.current.children).findIndex((item) => item.id === dragId);
+      const newDraggingToItemIndex = Array.from(
+        bodyRef.current.children
+      ).findIndex((item) => item.id === dragId);
       if (newDraggingToItemIndex !== draggingToItemIndex) {
-        const tempItemOrder = moveItem([...itemOrder], draggedItemId, newDraggingToItemIndex);
+        const tempItemOrder = moveItem([...itemOrder], draggedItemId!, newDraggingToItemIndex);
         move(tempItemOrder);
         setDraggingToItemIndex(newDraggingToItemIndex);
         setTempItemOrder(tempItemOrder);
@@ -139,8 +163,13 @@ export const TableDraggable: React.FunctionComponent = () => {
     }
   ];
 
+  const orderedRows = itemOrder.map((id) => rows.find((r) => r.id === id)!);
+
   return (
-    <Table aria-label="Draggable table" className={isDragging ? styles.modifiers.dragOver : ''}>
+    <Table
+      aria-label="Draggable table"
+      className={isDragging ? styles.modifiers.dragOver : ''}
+    >
       <Thead>
         <Tr>
           <Th screenReaderText="Drag and drop" />
@@ -149,11 +178,22 @@ export const TableDraggable: React.FunctionComponent = () => {
           ))}
         </Tr>
       </Thead>
-      <Tbody ref={bodyRef} onDragOver={onDragOver} onDrop={onDragOver} onDragLeave={onDragLeave}>
-        {rows.map((row, rowIndex) => {
+      <Tbody
+        ref={bodyRef}
+        onDragOver={onDragOver}
+        onDragLeave={onDragLeave}
+      >
+        {orderedRows.map((row, rowIndex) => {
           const rowCellsToBuild = Object.keys(row).filter((rowCell) => rowCell !== 'id');
           return (
-            <Tr key={rowIndex} id={row.id} draggable onDrop={onDrop} onDragEnd={onDragEnd} onDragStart={onDragStart}>
+            <Tr
+              key={rowIndex}
+              id={row.id}
+              draggable
+              onDragStart={onDragStart}
+              onDrop={onDrop}
+              onDragEnd={onDragEnd}
+            >
               <Td
                 draggableRow={{
                   id: `draggable-row-${row.id}`
@@ -161,7 +201,7 @@ export const TableDraggable: React.FunctionComponent = () => {
               />
               {rowCellsToBuild.map((key, keyIndex) => (
                 <Td key={`${rowIndex}_${keyIndex}`} dataLabel={columns[keyIndex]}>
-                  {row[key]}
+                  {row[key as keyof typeof row] ?? '--'}
                 </Td>
               ))}
             </Tr>

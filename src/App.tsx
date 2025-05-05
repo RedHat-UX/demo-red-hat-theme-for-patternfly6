@@ -4,7 +4,7 @@ import './App.scss'
 import HomePage from './views/Homepage/HomePage'
 import PfButton from "./components/Button/Button";
 import PfBreadcrumb from "./components/BreadCrumb/BreadCrumb";
-import PfForm from "./components/Form/Form";
+// import PfForm from "./components/Form/Form";
 import PfAccordion from "./components/Accordion/Accordion";
 import PfCard from "./components/Card/Card";
 import PfTable from "./components/Table/Table";
@@ -39,7 +39,7 @@ const AppRoutes = createBrowserRouter([{
     },
     {
       path: "/form",
-      element: <PfForm/>
+      // element: <PfForm/>
     },
     {
       path: "/accordion",
