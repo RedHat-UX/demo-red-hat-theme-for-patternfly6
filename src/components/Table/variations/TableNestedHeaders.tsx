@@ -16,7 +16,7 @@ interface PodConnection {
   traffic: string;
   packets: number;
 }
-
+ 
 export const TableNestedHeaders: React.FunctionComponent = () => {
   // In real usage, this data would come from some external source like an API via props.
   const connections: PodConnection[] = [
@@ -55,10 +55,10 @@ export const TableNestedHeaders: React.FunctionComponent = () => {
   // Index of the currently sorted column
   // Note: if you intend to make columns reorderable, you may instead want to use a non-numeric key
   // as the identifier of the sorted column. See the "Compound expandable" example.
-  const [activeSortIndex, setActiveSortIndex] = React.useState<number | null>(null);
+  const [activeSortIndex, setActiveSortIndex] = React.useState<number | undefined>(undefined);
 
   // Sort direction of the currently sorted column
-  const [activeSortDirection, setActiveSortDirection] = React.useState<'asc' | 'desc' | null>(null);
+  const [activeSortDirection, setActiveSortDirection] = React.useState<'asc' | 'desc' | undefined>(undefined);
 
   // Since OnSort specifies sorted columns by index, we need sortable values for our object by column index.
   const getSortableRowValues = (connection: PodConnection): (string | number)[] => {
@@ -79,7 +79,7 @@ export const TableNestedHeaders: React.FunctionComponent = () => {
   // Note that we perform the sort as part of the component's render logic and not in onSort.
   // We shouldn't store the list of data in state because we don't want to have to sync that with props.
   let sortedConnections = connections;
-  if (activeSortIndex !== null) {
+  if (activeSortIndex !== undefined) {
     sortedConnections = connections.sort((a, b) => {
       const aValue = getSortableRowValues(a)[activeSortIndex];
       const bValue = getSortableRowValues(b)[activeSortIndex];
@@ -157,7 +157,7 @@ export const TableNestedHeaders: React.FunctionComponent = () => {
           {sortedConnections.map((connection) => (
             <Tr key={connection.source.podName}>
               <Td dataLabel={columnNames.source}>{connection.source.podName}</Td>
-              <Td dataLabel={columnNames.destination}>{connection.destination.podName}</Td>\
+              <Td dataLabel={columnNames.destination}>{connection.destination.podName}</Td>
               <Td dataLabel={columnNames.datetime}>
                 <div>
                   <Timestamp dateFormat="full" timeFormat="medium" date={new Date(connection.timestamp)} />

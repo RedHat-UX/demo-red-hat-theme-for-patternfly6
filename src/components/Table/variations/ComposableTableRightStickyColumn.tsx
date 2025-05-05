@@ -13,7 +13,7 @@ interface Fact {
   detail7: string;
 }
 
-export const ComposableTableRightStickyColumn: React.FunctionComponent = () => {
+export const ComposableTableRightStickyColumn: React.FC = () => {
   // In real usage, this data would come from some external source like an API via props.
   const facts: Fact[] = Array.from({ length: 9 }, (_, index) => ({
     name: `Fact ${index + 1}`,
@@ -39,7 +39,7 @@ export const ComposableTableRightStickyColumn: React.FunctionComponent = () => {
     header9: 'Header 9'
   };
 
-  // Index of the currently sorted column
+ // Index of the currently sorted column
   // Note: if you intend to make columns reorderable, you may instead want to use a non-numeric key
   // as the identifier of the sorted column. See the "Compound expandable" example.
   const [activeSortIndex, setActiveSortIndex] = React.useState<number | null>(null);
@@ -51,32 +51,38 @@ export const ComposableTableRightStickyColumn: React.FunctionComponent = () => {
   // This example is trivial since our data objects just contain strings, but if the data was more complex
   // this would be a place to return simplified string or number versions of each column to sort by.
   const getSortableRowValues = (fact: Fact): (string | number)[] => {
-    const { name, state, detail1, detail2, detail3, detail4, detail5, detail6, detail7 } = fact;
-    return [name, state, detail1, detail2, detail3, detail4, detail5, detail6, detail7];
+    return [
+      fact.name,
+      fact.state,
+      fact.detail1,
+      fact.detail2,
+      fact.detail3,
+      fact.detail4,
+      fact.detail5,
+      fact.detail6,
+      fact.detail7
+    ];
   };
-
-  // Note that we perform the sort as part of the component's render logic and not in onSort.
+  
+   // Note that we perform the sort as part of the component's render logic and not in onSort.
   // We shouldn't store the list of data in state because we don't want to have to sync that with props.
-  let sortedFacts = facts;
-  if (activeSortIndex !== null) {
-    sortedFacts = facts.sort((a, b) => {
+
+  const sortedFacts = React.useMemo(() => {
+    if (activeSortIndex === null || activeSortDirection === null) {
+      return facts;
+    }
+    return [...facts].sort((a, b) => {
       const aValue = getSortableRowValues(a)[activeSortIndex];
       const bValue = getSortableRowValues(b)[activeSortIndex];
-      if (aValue === bValue) {
-        return 0;
-      }
-      if (activeSortDirection === 'asc') {
-        return aValue > bValue ? 1 : -1;
-      } else {
-        return bValue > aValue ? 1 : -1;
-      }
+      if (aValue === bValue) return 0;
+      return (aValue > bValue ? 1 : -1) * (activeSortDirection === 'asc' ? 1 : -1);
     });
-  }
+  }, [facts, activeSortIndex, activeSortDirection]);
 
   const getSortParams = (columnIndex: number): ThProps['sort'] => ({
     sortBy: {
-      index: activeSortIndex,
-      direction: activeSortDirection
+      index: activeSortIndex ?? undefined,
+      direction: activeSortDirection ?? undefined
     },
     onSort: (_event, index, direction) => {
       setActiveSortIndex(index);
@@ -90,18 +96,20 @@ export const ComposableTableRightStickyColumn: React.FunctionComponent = () => {
       <Table aria-label="Sticky column table" gridBreakPoint="">
         <Thead>
           <Tr>
-            <Th modifier="truncate" sort={getSortParams(0)}>
-              {columnNames.name}
-            </Th>
-            <Th modifier="truncate" sort={getSortParams(1)}>
-              {columnNames.state}
-            </Th>
+            <Th modifier="truncate" sort={getSortParams(0)}>{columnNames.name}</Th>
+            <Th modifier="truncate" sort={getSortParams(1)}>{columnNames.state}</Th>
             <Th modifier="truncate">{columnNames.header3}</Th>
             <Th modifier="truncate">{columnNames.header4}</Th>
             <Th modifier="truncate">{columnNames.header5}</Th>
             <Th modifier="truncate">{columnNames.header6}</Th>
             <Th modifier="truncate">{columnNames.header7}</Th>
-            <Th isStickyColumn hasLeftBorder stickyMinWidth="130px" stickyRightOffset="130px" modifier="truncate">
+            <Th
+              isStickyColumn
+              hasLeftBorder
+              stickyMinWidth="130px"
+              stickyRightOffset="130px"
+              modifier="truncate"
+            >
               {columnNames.header8}
             </Th>
             <Th isStickyColumn stickyMinWidth="130px" modifier="truncate">
@@ -110,38 +118,31 @@ export const ComposableTableRightStickyColumn: React.FunctionComponent = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {sortedFacts.map((fact) => (
-            <Tr key={fact.name}>
+          {sortedFacts.map((fact, index) => (
+            <Tr key={`${fact.name}-${index}`}>
               <Th modifier="nowrap">{fact.name}</Th>
-              <Td modifier="nowrap" dataLabel={columnNames.state}>
-                {fact.state}
-              </Td>
-              <Td modifier="nowrap" dataLabel={columnNames.header3}>
-                {fact.detail1}
-              </Td>
-              <Td modifier="nowrap" dataLabel={columnNames.header4}>
-                {fact.detail2}
-              </Td>
-              <Td modifier="nowrap" dataLabel={columnNames.header5}>
-                {fact.detail3}
-              </Td>
-              <Td modifier="nowrap" dataLabel={columnNames.header6}>
-                {fact.detail4}
-              </Td>
-              <Td modifier="nowrap" dataLabel={columnNames.header7}>
-                {fact.detail5}
-              </Td>
+              <Td dataLabel={columnNames.state} modifier="nowrap">{fact.state}</Td>
+              <Td dataLabel={columnNames.header3} modifier="nowrap">{fact.detail1}</Td>
+              <Td dataLabel={columnNames.header4} modifier="nowrap">{fact.detail2}</Td>
+              <Td dataLabel={columnNames.header5} modifier="nowrap">{fact.detail3}</Td>
+              <Td dataLabel={columnNames.header6} modifier="nowrap">{fact.detail4}</Td>
+              <Td dataLabel={columnNames.header7} modifier="nowrap">{fact.detail5}</Td>
               <Td
                 isStickyColumn
                 hasLeftBorder
                 stickyMinWidth="130px"
                 stickyRightOffset="130px"
-                modifier="nowrap"
                 dataLabel={columnNames.header8}
+                modifier="nowrap"
               >
                 {fact.detail6}
               </Td>
-              <Td isStickyColumn stickyMinWidth="130px" modifier="nowrap" dataLabel={columnNames.header9}>
+              <Td
+                isStickyColumn
+                stickyMinWidth="130px"
+                dataLabel={columnNames.header9}
+                modifier="nowrap"
+              >
                 {fact.detail7}
               </Td>
             </Tr>

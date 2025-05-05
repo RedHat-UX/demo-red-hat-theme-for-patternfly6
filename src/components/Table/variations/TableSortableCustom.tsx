@@ -12,7 +12,7 @@ import {
   MenuToggleElement
 } from '@patternfly/react-core';
 import SortAmountDownIcon from '@patternfly/react-icons/dist/esm/icons/sort-amount-down-icon';
-
+ 
 interface Repository {
   name: string;
   branches: string;
@@ -42,13 +42,10 @@ export const TableSortableCustom: React.FunctionComponent = () => {
   // Index of the currently sorted column
   // Note: if you intend to make columns reorderable, you may instead want to use a non-numeric key
   // as the identifier of the sorted column. See the "Compound expandable" example.
-  const [activeSortIndex, setActiveSortIndex] = React.useState<number | null>(null);
+  const [activeSortIndex, setActiveSortIndex] = React.useState<number | undefined>(undefined);
 
   // Sort direction of the currently sorted column
-  const [activeSortDirection, setActiveSortDirection] = React.useState<'asc' | 'desc' | null>(null);
-
-  // Sort dropdown expansion
-  // const [isSortDropdownOpen, setIsSortDropdownOpen] = React.useState(false);
+  const [activeSortDirection, setActiveSortDirection] = React.useState<'asc' | 'desc' | undefined>(undefined);
 
   // Since OnSort specifies sorted columns by index, we need sortable values for our object by column index.
   // This example is trivial since our data objects just contain strings, but if the data was more complex
@@ -61,7 +58,7 @@ export const TableSortableCustom: React.FunctionComponent = () => {
   // Note that we perform the sort as part of the component's render logic and not in onSort.
   // We shouldn't store the list of data in state because we don't want to have to sync that with props.
   let sortedRepositories = repositories;
-  if (activeSortIndex !== null) {
+  if (activeSortIndex !== undefined) {
     sortedRepositories = repositories.sort((a, b) => {
       const aValue = getSortableRowValues(a)[activeSortIndex];
       const bValue = getSortableRowValues(b)[activeSortIndex];
@@ -102,12 +99,12 @@ export const TableSortableCustom: React.FunctionComponent = () => {
               isOpen={isSortDropdownOpen}
               selected={[activeSortDirection, activeSortIndex]}
               onOpenChange={(isOpen) => setIsSortDropdownOpen(isOpen)}
-              onSelect={(event, value) => {
+              onSelect={(_event?: React.MouseEvent<Element, MouseEvent>, value?: string | number) => {
                 if (value === 'asc' || value === 'desc') {
                   setActiveSortDirection(value as 'desc' | 'asc');
                 } else {
                   setActiveSortIndex(value as number);
-                  setActiveSortDirection(activeSortDirection !== null ? activeSortDirection : 'asc');
+                  setActiveSortDirection(activeSortDirection !== undefined ? activeSortDirection : 'asc');
                 }
               }}
               toggle={(toggleRef: React.Ref<MenuToggleElement>) => (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table, Thead, Tr, Th, Tbody, Td } from '@patternfly/react-table';
-import { Button, Checkbox, Radio, TextInput, KeyTypes, getUniqueId } from '@patternfly/react-core';
+import { Button, Checkbox, Radio, TextInput, getUniqueId } from '@patternfly/react-core'; // Removed KeyTypes
 import PencilAltIcon from '@patternfly/react-icons/dist/esm/icons/pencil-alt-icon';
 import CheckIcon from '@patternfly/react-icons/dist/esm/icons/check-icon';
 import TimesIcon from '@patternfly/react-icons/dist/esm/icons/times-icon';
@@ -9,7 +9,7 @@ import { css } from '@patternfly/react-styles';
 
 interface EditButtonsCellProps {
   onClick: (type: 'save' | 'cancel' | 'edit') => void;
-  elementToFocusOnEditRef?: React.MutableRefObject<HTMLElement>;
+  elementToFocusOnEditRef?: React.RefObject<HTMLElement>; // Changed from MutableRefObject to RefObject
   rowAriaLabel: string;
 }
 
@@ -18,13 +18,13 @@ const EditButtonsCell: React.FunctionComponent<EditButtonsCellProps> = ({
   elementToFocusOnEditRef,
   rowAriaLabel = 'row'
 }) => {
-  const editButtonRef = React.useRef<HTMLButtonElement>();
+  const editButtonRef = React.useRef<HTMLButtonElement>(null);
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, button: 'edit' | 'stopEditing') => {
     const focusRef = button === 'edit' ? elementToFocusOnEditRef : editButtonRef;
 
-    if (event.key === KeyTypes.Enter || event.key === KeyTypes.Space) {
-      // because space key triggers click event before keyDown, we have to prevent default behaviour and trigger click manually
+    if (event.key === 'Enter' || event.key === ' ') {
+      // Prevent default behavior and trigger click manually
       event.preventDefault();
       (event.target as HTMLButtonElement).click();
       setTimeout(() => {
@@ -137,7 +137,7 @@ const EditableRow: React.FunctionComponent<EditableRow> = ({
   const [editable, setEditable] = React.useState(false);
   const [editedData, setEditedData] = React.useState(data);
 
-  const inputRef = React.useRef();
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
   return (
     <Tr className={css(inlineEditStyles.inlineEdit, editable ? inlineEditStyles.modifiers.inlineEditable : '')}>
@@ -235,7 +235,6 @@ interface CustomDataOptions {
 type ColumnNames<T> = { [K in keyof T]: string };
 
 export const TableEditable: React.FunctionComponent = () => {
-  // In real usage, this data would come from some external source like an API via props.
   const initialRows: CustomData[] = [
     {
       textInput: 'Editable text 1',
@@ -257,7 +256,6 @@ export const TableEditable: React.FunctionComponent = () => {
     }
   ];
 
-  // List of all selectable options for some cells of initialRows
   const initialRowsOptions: CustomDataOptions[] = [
     {
       checkboxes: ['Option A', 'Option B', 'Option C'],
@@ -305,7 +303,7 @@ export const TableEditable: React.FunctionComponent = () => {
               setRows((rows) => rows.map((row, i) => (i === index ? editedRow : row)));
             }}
             ariaLabel={`row ${index + 1}`}
-          ></EditableRow>
+          />
         ))}
       </Tbody>
     </Table>
