@@ -6,9 +6,10 @@ import PfButton from "./components/Button/Button";
 import PfBreadcrumb from "./components/BreadCrumb/BreadCrumb";
 // import PfForm from "./components/Form/Form";
 import PfAccordion from "./components/Accordion/Accordion";
-import PfCard from "./components/Card/Card";
+import PfCard from "./components/Card/Cards";
 import PfTable from "./components/Table/Table";
 // import 'redhat-brand-theme/dist/redhat-brand-theme.css';
+import '/Users/hrithikgavankar/Desktop/WORK/Patternfly/rhds-theme/dist/redhat-brand-theme.css'
 import './rhds-theme.css';
 
 function App() {
