@@ -1046,14 +1046,15 @@
   --pf-v6-c-skeleton--BorderRadius: var(--rh-border-radius-sharp, 0);
 }
 
+/*** Commented out all the style overrides **/
 .pf-v6-c-table {
   /* Header styles */
   --pf-v6-c-table__thead--cell--FontWeight: var(--rh-font-weight-heading-bold, 700);
-  --pf-v6-c-table__thead--cell--FontSize: var(--rh-font-size-code-sm, 14px);
+  --pf-v6-c-table__thead--cell--FontSize: var(--rh-font-size-body-text-sm 14px);
   /* Body styles */
   --pf-v6-c-table__tbody--cell--PaddingBlockStart: var(--rh-space-xl, 24px);
   --pf-v6-c-table__tbody--cell--PaddingBlockEnd: var(--rh-space-xl, 24px);
-  --pf-v6-c-table__tbody--cell--FontSize: var(--rh-font-size-code-md, 16px);
+  --pf-v6-c-table__tbody--cell--FontSize: var(--rh-font-size-body-text-md, 16px);
   /* First and Last child styles styles */
   --pf-v6-c-table--cell--first-last-child--PaddingInline: var(--rh-space-lg, 16px);
   /* Striped background color styles*/
@@ -1065,7 +1066,7 @@
 /* Nested selectors for table header that need specific overrides */
 /* Nested selectors for table body that need specific overrides */
 .pf-v6-c-table tbody:where(.pf-v6-c-table__tbody) .pf-v6-c-table__expandable-row .pf-v6-c-table__expandable-row-content {
-  padding-inline: 0px;
+  padding-inline: 0;
   padding-block: var(--rh-space-xl, 24px);
 }
 
@@ -1082,6 +1083,17 @@
 }
 
 /* Selectors for compound expandable table variants */
+.pf-v6-c-table__compound-expansion-toggle.pf-m-expanded {
+  border-left-width: var(--rh-border-width-sm, 1px);
+  border-bottom-width: var(--rh-border-width-sm, 1px);
+  border-right-width: var(--rh-border-width-sm, 1px);
+}
+
+.pf-v6-c-table__compound-expansion-toggle:hover {
+  border-left-width: var(--rh-border-width-sm, 1px);
+  border-right-width: var(--rh-border-width-sm, 1px);
+}
+
 /* Nested selectors for specific overrides */
 .pf-v6-c-table:not(.pf-m-sticky-header) > .pf-m-nested-column-header tr:where(.pf-v6-c-table__tr):not(:last-child) th:where(.pf-v6-c-table__th):not([rowspan]),
 .pf-v6-c-table:not(.pf-m-sticky-header) > .pf-m-nested-column-header tr:where(.pf-v6-c-table__tr):not(:last-child) td:where(.pf-v6-c-table__td):not([rowspan]) {
@@ -1094,13 +1106,18 @@
 }
 
 /* Selectors for nested column header variants */
+.pf-v6-c-table.pf-m-sticky-header > .pf-v6-c-table__thead,
+.pf-v6-c-table .pf-v6-c-table__thead.pf-m-nested-column-header {
+  border-bottom-width: var(--rh-border-width-sm, 1px);
+}
+
 /* Selectors for clickable table variants */
 .pf-v6-c-table tr:where(.pf-v6-c-table__tr).pf-m-clickable:is(:hover, :focus) {
-  box-shadow: 0 -0.1875rem 0.25rem -0.125rem rgba(3, 3, 3, 0.08), 0 0.1875rem 0.25rem -0.125rem rgba(3, 3, 3, 0.08);
+  box-shadow: var(--rh-box-shadow-sm, 0 -0.1875rem 0.25rem -0.125rem rgba(3, 3, 3, 0.08), 0 0.1875rem 0.25rem -0.125rem rgba(3, 3, 3, 0.08));
 }
 
 .pf-v6-c-table tr:where(.pf-v6-c-table__tr).pf-m-selected {
-  box-shadow: 0 -0.1875rem 0.25rem -0.125rem rgba(3, 3, 3, 0.08), 0 0.1875rem 0.25rem -0.125rem rgba(3, 3, 3, 0.08);
+  box-shadow: var(--rh-box-shadow-sm, 0 -0.1875rem 0.25rem -0.125rem rgba(3, 3, 3, 0.08), 0 0.1875rem 0.25rem -0.125rem rgba(3, 3, 3, 0.08));
   position: relative;
 }
 .pf-v6-c-table tr:where(.pf-v6-c-table__tr).pf-m-selected::after {
