@@ -4,10 +4,12 @@ import './App.scss'
 import HomePage from './views/Homepage/HomePage'
 import PfButton from "./components/Button/Button";
 import PfBreadcrumb from "./components/BreadCrumb/BreadCrumb";
-import PfForm from "./components/Form/Form";
+// import PfForm from "./components/Form/Form";
 import PfAccordion from "./components/Accordion/Accordion";
 import PfCard from "./components/Card/Card";
-import 'redhat-brand-theme/dist/redhat-brand-theme.css';
+import PfTable from "./components/Table/Table";
+// import 'redhat-brand-theme/dist/redhat-brand-theme.css';
+import './rhds-theme.css';
 
 function App() {
 
@@ -37,7 +39,7 @@ const AppRoutes = createBrowserRouter([{
     },
     {
       path: "/form",
-      element: <PfForm/>
+      // element: <PfForm/>
     },
     {
       path: "/accordion",
@@ -46,6 +48,10 @@ const AppRoutes = createBrowserRouter([{
     {
       path: "/card",
       element: <PfCard/>
+    },
+    {
+      path: "/table",
+      element: <PfTable/>
     }
   ]
 }])

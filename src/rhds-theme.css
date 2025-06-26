@@ -3,7 +3,7 @@
  * 
  * @license Copyright (c) 2022 Red Hat UX MIT License
  */
- :root {
+:root {
   --rh-animation-speed: 0.3s;
   --rh-animation-timing: cubic-bezier(0.465, 0.183, 0.153, 0.946);
   /* 1px border width; Example: Secondary CTA or Button */
@@ -1043,11 +1043,90 @@
 }
 
 .pf-v6-c-skeleton {
-  --pf-v6-c-popover__content--BorderRadius: var(--rh-border-radius-sharp, 0);
+  --pf-v6-c-skeleton--BorderRadius: var(--rh-border-radius-sharp, 0);
 }
 
-.pf-v6-c-modal-box {
-  --pf-v6-c-modal-box--BorderRadius: var(--rh-border-radius-sharp, 0px);
+/*** Commented out all the style overrides **/
+.pf-v6-c-table {
+  /* Header styles */
+  --pf-v6-c-table__thead--cell--FontWeight: var(--rh-font-weight-heading-bold, 700);
+  --pf-v6-c-table__thead--cell--FontSize: var(--rh-font-size-body-text-sm 14px);
+  /* Body styles */
+  --pf-v6-c-table__tbody--cell--PaddingBlockStart: var(--rh-space-xl, 24px);
+  --pf-v6-c-table__tbody--cell--PaddingBlockEnd: var(--rh-space-xl, 24px);
+  --pf-v6-c-table__tbody--cell--FontSize: var(--rh-font-size-body-text-md, 16px);
+  /* First and Last child styles styles */
+  --pf-v6-c-table--cell--first-last-child--PaddingInline: var(--rh-space-lg, 16px);
+  /* Striped background color styles*/
+  /* Sort indicator color styles*/
+  /* Favorite selected state styles */
+  /* Clickable variant styles */
+}
+
+/* Nested selectors for table header that need specific overrides */
+/* Nested selectors for table body that need specific overrides */
+.pf-v6-c-table tbody:where(.pf-v6-c-table__tbody) .pf-v6-c-table__expandable-row .pf-v6-c-table__expandable-row-content {
+  padding-inline: 0;
+  padding-block: var(--rh-space-xl, 24px);
+}
+
+/* Selectors for compact table variants */
+.pf-v6-c-table.pf-m-compact tr:where(.pf-v6-c-table__tr) > * {
+  padding-inline-start: var(--rh-space-md, 8px);
+  padding-inline-end: var(--rh-space-md, 8px);
+}
+
+/* Selectors for Editable rows table variant */
+/* Selectors for Expandable table variant */
+.pf-v6-c-table__expandable-row.pf-m-expanded {
+  border-bottom: 0;
+}
+
+/* Selectors for compound expandable table variants */
+.pf-v6-c-table__compound-expansion-toggle.pf-m-expanded {
+  border-left-width: var(--rh-border-width-sm, 1px);
+  border-bottom-width: var(--rh-border-width-sm, 1px);
+  border-right-width: var(--rh-border-width-sm, 1px);
+}
+
+.pf-v6-c-table__compound-expansion-toggle:hover {
+  border-left-width: var(--rh-border-width-sm, 1px);
+  border-right-width: var(--rh-border-width-sm, 1px);
+}
+
+/* Nested selectors for specific overrides */
+.pf-v6-c-table:not(.pf-m-sticky-header) > .pf-m-nested-column-header tr:where(.pf-v6-c-table__tr):not(:last-child) th:where(.pf-v6-c-table__th):not([rowspan]),
+.pf-v6-c-table:not(.pf-m-sticky-header) > .pf-m-nested-column-header tr:where(.pf-v6-c-table__tr):not(:last-child) td:where(.pf-v6-c-table__td):not([rowspan]) {
+  --pf-v6-c-table--cell--PaddingBlockEnd: var(--rh-length-xs, 4px);
+}
+
+.pf-v6-c-table__expandable-row td:where(.pf-v6-c-table__td).pf-m-no-padding .pf-v6-c-table__expandable-row-content,
+.pf-v6-c-table__expandable-row th:where(.pf-v6-c-table__th).pf-m-no-padding .pf-v6-c-table__expandable-row-content {
+  padding: 0;
+}
+
+/* Selectors for nested column header variants */
+.pf-v6-c-table.pf-m-sticky-header > .pf-v6-c-table__thead,
+.pf-v6-c-table .pf-v6-c-table__thead.pf-m-nested-column-header {
+  border-bottom-width: var(--rh-border-width-sm, 1px);
+}
+
+/* Selectors for clickable table variants */
+.pf-v6-c-table tr:where(.pf-v6-c-table__tr).pf-m-clickable:is(:hover, :focus) {
+  box-shadow: var(--rh-box-shadow-sm, 0 -0.1875rem 0.25rem -0.125rem rgba(3, 3, 3, 0.08), 0 0.1875rem 0.25rem -0.125rem rgba(3, 3, 3, 0.08));
+}
+
+.pf-v6-c-table tr:where(.pf-v6-c-table__tr).pf-m-selected {
+  box-shadow: var(--rh-box-shadow-sm, 0 -0.1875rem 0.25rem -0.125rem rgba(3, 3, 3, 0.08), 0 0.1875rem 0.25rem -0.125rem rgba(3, 3, 3, 0.08));
+  position: relative;
+}
+.pf-v6-c-table tr:where(.pf-v6-c-table__tr).pf-m-selected::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 73px;
 }
 
 :root {
@@ -1055,5 +1134,4 @@
   --pf-t--global--border--radius--medium: var(--rh-border-radius-sharp, 0);
   --pf-t--global--background--color--600: var(--rh-color-surface-lightest, #ffffff);
   --pf-t--global--background--color--action--plain--default: var(--rh-color-surface-lightest, #ffffff);
-  --pf-t--global--border--radius--400: var(--rh-border-radius-default, 0px);
 }
