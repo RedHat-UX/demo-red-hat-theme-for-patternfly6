@@ -1,0 +1,146 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.dashboard-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #000000;
+  border-bottom: 2px solid #ee0000;
+
+  #dashboard-toolbar {
+    background-color: #000000;
+    padding: 0 2rem;
+    height: 72px;
+    
+    .pf-v6-c-toolbar__content-section {
+      align-items: center;
+    }
+    
+    .pf-v6-c-toolbar__item {
+      align-items: center;
+    }
+    
+    img {
+      width: auto;
+      height: 32px;
+      border-right: 1px solid #cdcdcd;
+      padding-right: 1rem;
+      margin-right: 1rem;
+    }
+  }
+
+  .dashboard-title {
+    color: white;
+    font-family: Red Hat Display, RedHatDisplay, Helvetica Neue, Arial, sans-serif;
+    font-weight: 500;
+  }
+}
+
+.dashboard-body {
+  display: flex;
+  margin-top: 72px; // Account for fixed header
+  height: calc(100vh - 72px);
+}
+
+.dashboard-sidebar {
+  width: 250px;
+  background-color: #1a1a1a;
+  border-right: 2px solid #ee0000;
+  padding: 1rem 0;
+
+  #dashboard-nav {
+    .pf-v6-c-nav__list {
+      padding: 0;
+      margin: 0;
+    }
+
+    .pf-v6-c-nav__item {
+      margin-bottom: 0.25rem;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #ffffff;
+      padding: 0.75rem 1rem;
+      margin: 0 0.5rem;
+      border-radius: 4px;
+      transition: background-color 0.2s ease;
+      
+      &:hover {
+        text-decoration: none;
+        color: #ffffff;
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      svg {
+        margin-right: 0.75rem;
+        font-size: 1rem;
+      }
+    }
+    
+    .nav-text {
+      font-weight: 500;
+    }
+    
+    .pf-v6-c-nav__item.pf-m-current .nav-link {
+      background-color: #ee0000;
+      color: #ffffff;
+    }
+  }
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .dashboard-sidebar {
+    width: 200px;
+  }
+
+  .dashboard-content {
+    padding: 1rem;
+  }
+  
+  .dashboard-header #dashboard-toolbar {
+    padding: 0 1rem;
+    
+    .dashboard-title {
+      font-size: 1rem;
+    }
+    
+    img {
+      height: 24px;
+      padding-right: 0.5rem;
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .dashboard-sidebar {
+    width: 180px;
+  }
+
+  .dashboard-header #dashboard-toolbar {
+    .dashboard-title {
+      display: none;
+    }
+  }
+}
+
+// Additional PatternFly overrides
+.pf-v6-c-nav {
+  background-color: transparent;
+} 
