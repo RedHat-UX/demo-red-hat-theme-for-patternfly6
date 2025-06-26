@@ -10,7 +10,6 @@ import PfCard from "./components/Card/Cards";
 import PfTable from "./components/Table/Table";
 import Dashboard from "./components/Dashboard/Dashboard";
 // import 'redhat-brand-theme/dist/redhat-brand-theme.css';
-import '/Users/hrithikgavankar/Desktop/WORK/Patternfly/rhds-theme/dist/redhat-brand-theme.css'
 import './rhds-theme.css';
 
 const AppRoutes = createBrowserRouter([{
