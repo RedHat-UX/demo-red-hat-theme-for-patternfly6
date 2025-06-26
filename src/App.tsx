@@ -1,5 +1,5 @@
 import ReactDOM  from "react-dom/client";
-import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './App.scss'
 import HomePage from './views/Homepage/HomePage'
 import PfButton from "./components/Button/Button";
@@ -8,26 +8,21 @@ import PfBreadcrumb from "./components/BreadCrumb/BreadCrumb";
 import PfAccordion from "./components/Accordion/Accordion";
 import PfCard from "./components/Card/Cards";
 import PfTable from "./components/Table/Table";
+import Dashboard from "./components/Dashboard/Dashboard";
 // import 'redhat-brand-theme/dist/redhat-brand-theme.css';
-
+import '/Users/hrithikgavankar/Desktop/WORK/Patternfly/rhds-theme/dist/redhat-brand-theme.css'
 import './rhds-theme.css';
-
-function App() {
-
-  return (
-    <div className="app">
-      
-      <Outlet />
-    </div>
-  )
-}
 
 const AppRoutes = createBrowserRouter([{
   path: '/',
-  element: <App/>,
+  element: <Dashboard/>,
   children:[
     {
-      path: "/",
+      index: true,
+      element: <HomePage/>
+    },
+    {
+      path: "/home",
       element: <HomePage/>
     },
     {

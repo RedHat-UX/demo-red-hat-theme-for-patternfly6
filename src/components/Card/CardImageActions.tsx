@@ -112,8 +112,8 @@ const CardImageActions: FC = () => {
               style={{ width: "300px" }}
             />
           </CardHeader>
-          <CardTitle>Card with Image and Actions</CardTitle>
-          <CardBody>Body Content</CardBody>
+          <CardTitle>Title</CardTitle>
+          <CardBody>Body</CardBody>
           <CardFooter>Footer</CardFooter>
         </Card>
       </div>

@@ -64,3 +64,82 @@
         color: #151515;
     }
 }
+
+// Homepage styles
+.homepage {
+  .homepage-header {
+    margin-bottom: 2rem;
+    text-align: center;
+    
+    .homepage-title {
+      color: #ee0000;
+      margin-bottom: 1rem;
+    }
+    
+    .homepage-subtitle {
+      font-size: 1.1rem;
+      color: #6a6e73;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+  }
+  
+  .homepage-components {
+    margin-bottom: 3rem;
+    
+    .section-title {
+      color: #151515;
+      margin-bottom: 1.5rem;
+    }
+    
+    .component-link {
+      text-decoration: none;
+      color: #151515;
+      font-weight: 600;
+      
+      &:hover {
+        color: #ee0000;
+        text-decoration: none;
+      }
+    }
+    
+    .pf-v6-c-card {
+      height: 100%;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      
+      .pf-v6-c-card__body p {
+        color: #6a6e73;
+        margin: 0;
+      }
+    }
+  }
+  
+  .homepage-preview {
+    .section-title {
+      color: #151515;
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+// Responsive adjustments for homepage
+@media (max-width: 768px) {
+  .homepage {
+    .homepage-header {
+      .homepage-title {
+        font-size: 1.75rem;
+      }
+      
+      .homepage-subtitle {
+        font-size: 1rem;
+        padding: 0 1rem;
+      }
+    }
+  }
+}
