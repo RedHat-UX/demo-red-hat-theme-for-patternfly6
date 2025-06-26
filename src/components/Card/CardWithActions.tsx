@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Card, CardTitle, CardHeader, CardBody } from "@patternfly/react-core";
 
 const CardWithActions: FC = () => {

@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import {
   Card,
   CardTitle,
@@ -26,11 +26,11 @@ const CardExpandable: FC = () => {
     setIsOpen(!isOpen);
   };
 
-  const onClick = (checked) => {
+  const onClick = (checked: boolean) => {
     setIsChecked(checked);
   };
 
-  const onExpand = (event, id) => {
+  const onExpand = (_event: any, id: string) => {
     console.log(id);
     setIsExpanded(!isExpanded);
   };

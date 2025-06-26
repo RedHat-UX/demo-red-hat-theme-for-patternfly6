@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import CardDefault from './CardDefault';
 import CardModifiers from './CardModifiers';
 import CardImageActions from './CardImageActions';

@@ -10,7 +10,7 @@ const CardSelectable: FC = () => {
   const id2 = "selectable-card-input-2";
   const id3 = "selectable-card-input-3";
 
-  const onChange = (event, checked: boolean) => {
+  const onChange = (event: any, checked: boolean) => {
     const name = event.currentTarget.name;
     switch (name) {
       case id1:
