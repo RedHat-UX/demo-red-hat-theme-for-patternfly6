@@ -778,6 +778,73 @@
 
 .pf-v6-c-button {
   --pf-v6-c-button--BorderRadius: var(--rh-border-radius-default, 3px);
+  --pf-v6-c-button--m-attention--BackgroundColor: #c9190b;
+  --pf-v6-c-button--FontSize: var(--rh-font-size-code-md, 16px);
+  --pf-v6-c-button--PaddingBlockStart: var(--rh-length-sm, 6px);
+  --pf-v6-c-button--PaddingBlockEnd: var(--rh-length-sm, 6px);
+  --pf-v6-c-button--PaddingInlineStart: var(--rh-length-lg, 16px);
+  --pf-v6-c-button--PaddingInlineEnd: var(--rh-length-lg, 16px);
+}
+.pf-v6-c-button.pf-m-danger {
+  --pf-v6-c-button--BackgroundColor: #c9190b;
+}
+.pf-v6-c-button.pf-m-danger:hover {
+  --pf-v6-c-button--BackgroundColor: #a30000;
+}
+.pf-v6-c-button.pf-m-secondary.pf-m-danger, .pf-v6-c-button.pf-m-link.pf-m-danger {
+  --pf-v6-c-button--Color: #c9190b;
+  --pf-v6-c-button--BackgroundColor: var(--rh-color-canvas-white, #ffffff);
+}
+.pf-v6-c-button.pf-m-secondary.pf-m-danger:hover, .pf-v6-c-button.pf-m-link.pf-m-danger:hover {
+  --pf-v6-c-button--Color: #a30000;
+  --pf-v6-c-button--BackgroundColor: var(--rh-color-canvas-white, #ffffff);
+}
+.pf-v6-c-button.pf-m-secondary.pf-m-danger:hover {
+  --pf-v6-c-button--BorderColor: #a30000;
+}
+.pf-v6-c-button.pf-m-warning {
+  --pf-v6-c-button--BackgroundColor: #f0ab00;
+}
+.pf-v6-c-button.pf-m-warning:hover {
+  --pf-v6-c-button--BackgroundColor: #c58c00;
+}
+.pf-v6-c-button.pf-m-tertiary {
+  --pf-v6-c-button--Color: var(--rh-color-canvas-black, #151515);
+  --pf-v6-c-button--BorderColor: var(--rh-color-border-strong-on-light, #151515);
+}
+.pf-v6-c-button.pf-m-tertiary:hover {
+  --pf-v6-c-button--Color: var(--rh-color-canvas-black, #151515);
+}
+.pf-v6-c-button.pf-m-attention {
+  --pf-v6-c-button--BackgroundColor: #c9190b;
+}
+.pf-v6-c-button.pf-m-attention:hover {
+  --pf-v6-c-button--BackgroundColor: #a30000;
+}
+.pf-v6-c-button.pf-m-link {
+  background-color: var(--rh-color-canvas-white, #ffffff);
+}
+.pf-v6-c-button.pf-m-control {
+  --pf-v6-c-button--BackgroundColor: var(--rh-color-canvas-white, #ffffff);
+  --pf-v6-c-button--BorderRadius: var(--rh-border-radius-sharp, 0);
+  border-bottom: var(--rh-border-width-sm, 1px) solid #8a8d90;
+}
+.pf-v6-c-button.pf-m-control:hover {
+  border-bottom: var(--rh-border-width-sm, 1px) solid var(--rh-color-blue-50, #0066cc);
+}
+.pf-v6-c-button.pf-m-control:disabled {
+  background-color: #f0f0f0;
+}
+.pf-v6-c-button.pf-m-link.pf-m-inline {
+  --pf-v6-c-button--FontSize: var(--rh-font-size-code-md, 16px);
+}
+.pf-v6-c-button.pf-m-display-lg {
+  --pf-v6-c-button--PaddingBlockStart: var(--rh-length-lg, 16px);
+  --pf-v6-c-button--PaddingBlockEnd: var(--rh-length-lg, 16px);
+  --pf-v6-c-button--PaddingInlineStart: var(--rh-length-2xl, 32px);
+  --pf-v6-c-button--PaddingInlineEnd: var(--rh-length-2xl, 32px);
+  --pf-v6-c-button--FontSize: var(--rh-font-size-code-md, 16px);
+  font-weight: var(--rh-font-weight-heading-bold, 700);
 }
 
 .pf-v6-c-multiple-file-upload {
