@@ -157,7 +157,7 @@ export const TableNestedStickyHeaders: React.FunctionComponent = () => {
           {sortedConnections.map((connection) => (
             <Tr key={connection.source.podName}>
               <Td dataLabel={columnNames.source}>{connection.source.podName}</Td>
-              <Td dataLabel={columnNames.destination}>{connection.destination.podName}</Td>\
+              <Td dataLabel={columnNames.destination}>{connection.destination.podName}</Td>
               <Td dataLabel={columnNames.datetime}>
                 <div>
                   <Timestamp dateFormat="full" timeFormat="medium" date={new Date(connection.timestamp)} />
