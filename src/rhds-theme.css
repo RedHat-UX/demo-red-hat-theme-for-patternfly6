@@ -778,6 +778,26 @@
 
 .pf-v6-c-button {
   --pf-v6-c-button--BorderRadius: var(--rh-border-radius-default, 3px);
+  --pf-v6-c-button--FontSize: var(--rh-font-size-code-md, 16px);
+  --pf-v6-c-button--PaddingBlockStart: var(--rh-length-sm, 6px);
+  --pf-v6-c-button--PaddingBlockEnd: var(--rh-length-sm, 6px);
+  --pf-v6-c-button--PaddingInlineStart: var(--rh-length-lg, 16px);
+  --pf-v6-c-button--PaddingInlineEnd: var(--rh-length-lg, 16px);
+}
+.pf-v6-c-button.pf-m-control {
+  --pf-v6-c-button--BorderRadius: var(--rh-border-radius-sharp, 0);
+  border-bottom: var(--rh-border-width-sm, 1px) solid #8a8d90;
+}
+.pf-v6-c-button.pf-m-link.pf-m-inline {
+  --pf-v6-c-button--FontSize: var(--rh-font-size-code-md, 16px);
+}
+.pf-v6-c-button.pf-m-display-lg {
+  --pf-v6-c-button--PaddingBlockStart: var(--rh-length-lg, 16px);
+  --pf-v6-c-button--PaddingBlockEnd: var(--rh-length-lg, 16px);
+  --pf-v6-c-button--PaddingInlineStart: var(--rh-length-2xl, 32px);
+  --pf-v6-c-button--PaddingInlineEnd: var(--rh-length-2xl, 32px);
+  --pf-v6-c-button--FontSize: var(--rh-font-size-code-md, 16px);
+  font-weight: var(--rh-font-weight-heading-bold, 700);
 }
 
 .pf-v6-c-multiple-file-upload {
